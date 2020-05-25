@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Win32Resource></Win32Resource>
+    <ApplicationIcon>Resources\final.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Sorts\**" />
+    <EmbeddedResource Remove="Sorts\**" />
+    <None Remove="Sorts\**" />
+    <Page Remove="Sorts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="abstract.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Sorter">
+      <HintPath>..\..\..\..\CsharpProjects\Sorter\Sorter\bin\Release\netcoreapp3.1\Sorter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
