@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sorter;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,8 @@ namespace VisualSorts.Core
     {
         public string Name { get; set; }
 
-        private Sorter.Sorter sorter;
-        public NamedSort(string name, Sorter.Sorter sorter)
+        private AbstractSort sorter;
+        public NamedSort(string name, AbstractSort sorter)
         {
             Name = name;
             this.sorter = sorter;

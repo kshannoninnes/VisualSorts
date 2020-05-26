@@ -2,7 +2,7 @@
 
 namespace VisualSorts.Core
 {
-    class IntegerModelOrder : Order
+    class IntegerModelOrder : AbstractOrder
     {
         public override bool Equal(object x, object y)
         {
