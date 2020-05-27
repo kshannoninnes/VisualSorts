@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using VisualSorts.Core;
+using VisualSorts.Core.ViewModels;
 
-namespace VisualSorts.Commands
+namespace VisualSorts.Core.Commands
 {
-    class SortCommand : ICommand
+    internal class SortCommand : ICommand
     {
-        private readonly OxyChart viewModel;
+        private readonly SortViewModel _viewModel;
 
         public event EventHandler CanExecuteChanged;
 
-        public SortCommand(OxyChart viewModel)
+        public SortCommand(SortViewModel viewModel)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         void ICommand.Execute(object parameter)
         {
-            viewModel.Sort();
+            _viewModel.SortData();
         }
 
         bool ICommand.CanExecute(object parameter)

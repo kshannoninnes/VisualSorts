@@ -1,8 +1,8 @@
-﻿namespace VisualSorts.Core
+﻿namespace VisualSorts.Core.Models
 {
     public class IntegerModel
     {
-        public int Value { get; set; }
+        public int Value { get; }
 
         public IntegerModel(int value)
         {

@@ -1,25 +1,22 @@
 ﻿using Sorter;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
-namespace VisualSorts.Core
+namespace VisualSorts.Core.Models
 {
     public class NamedSort
     {
-        public string Name { get; set; }
+        public string Name { get; }
 
-        private AbstractSort sorter;
+        private readonly AbstractSort _sorter;
         public NamedSort(string name, AbstractSort sorter)
         {
             Name = name;
-            this.sorter = sorter;
+            _sorter = sorter;
         }
 
         public void Sort(IList list, int low, int high)
         {
-            sorter.Sort(list, low, high);
+            _sorter.Sort(list, low, high);
         }
     }
 }

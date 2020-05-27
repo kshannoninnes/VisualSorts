@@ -1,8 +1,8 @@
 ﻿using Sorter;
 
-namespace VisualSorts.Core
+namespace VisualSorts.Core.Models
 {
-    class IntegerModelOrder : AbstractOrder
+    internal class IntegerModelOrder : AbstractOrder
     {
         public override bool Equal(object x, object y)
         {

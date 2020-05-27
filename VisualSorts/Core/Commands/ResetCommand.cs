@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Windows.Input;
-using VisualSorts.Core;
+using VisualSorts.Core.ViewModels;
 
-namespace VisualSorts.Commands
+namespace VisualSorts.Core.Commands
 {
-    class ResetCommand : ICommand
+    internal class ResetCommand : ICommand
     {
-        private readonly OxyChart viewModel;
+        private readonly SortViewModel _viewModel;
 
         public event EventHandler CanExecuteChanged;
 
-        public ResetCommand(OxyChart viewModel)
+        public ResetCommand(SortViewModel viewModel)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         void ICommand.Execute(object parameter)
         {
-            viewModel.Reset();
+            _viewModel.ResetData();
         }
 
         bool ICommand.CanExecute(object parameter)

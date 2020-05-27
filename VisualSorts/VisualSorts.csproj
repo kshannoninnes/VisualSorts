@@ -13,6 +13,10 @@
     <EmbeddedResource Remove="Sorts\**" />
     <None Remove="Sorts\**" />
     <Page Remove="Sorts\**" />
+    <Page Update="Core\Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
