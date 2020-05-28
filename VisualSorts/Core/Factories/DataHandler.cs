@@ -5,24 +5,24 @@ using VisualSorts.Core.Models;
 
 namespace VisualSorts.Core.Factories
 {
-    public static class IntegerModelFactory
+    public class DataHandler
     {
         private static ObservableCollection<IntegerModel> _orderedData;
 
-        private static void InitData(int length)
+        private void InitData(int length)
         {
             var rawData = Enumerable.Range(0, length).Select(x => new IntegerModel(x));
             _orderedData = new ObservableCollection<IntegerModel>(rawData);
         }
 
-        public static ObservableCollection<IntegerModel> GetOrdered(int length = 100)
+        public ObservableCollection<IntegerModel> GetOrdered(int length = 100)
         {
             if (_orderedData == null) InitData(length);
 
             return new ObservableCollection<IntegerModel>(_orderedData);
         }
 
-        public static ObservableCollection<IntegerModel> GetRandom(int length = 100)
+        public ObservableCollection<IntegerModel> GetRandom(int length = 100)
         {
             if (_orderedData == null) InitData(length);
 
@@ -31,7 +31,7 @@ namespace VisualSorts.Core.Factories
             return new ObservableCollection<IntegerModel>(randomized);
         }
 
-        public static ObservableCollection<IntegerModel> GetReversed(int length = 100)
+        public ObservableCollection<IntegerModel> GetReversed(int length = 100)
         {
             if (_orderedData == null) InitData(length);
 

@@ -4,11 +4,11 @@ using VisualSorts.Core.Models;
 
 namespace VisualSorts.Core.Factories
 {
-    public static class SortFactory
+    public class SortHandler
     {
-        private static ObservableCollection<NamedSort> _sorters;
+        private ObservableCollection<NamedSort> _sorters;
 
-        private static void InitSorts()
+        private void InitSorts()
         {
             _sorters = new ObservableCollection<NamedSort>();
 
@@ -20,7 +20,7 @@ namespace VisualSorts.Core.Factories
             _sorters.Add(new NamedSort("Heap Sort", new HeapSort(ordering)));
         }
 
-        public static ObservableCollection<NamedSort> GetSorters()
+        public ObservableCollection<NamedSort> GetSorters()
         {
             if (_sorters == null) InitSorts();
 

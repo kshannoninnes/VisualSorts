@@ -12,14 +12,19 @@ namespace VisualSorts.Core.ViewModels
         private readonly Plot _colPlot;
         private const int NumElements = 200;
 
+        private readonly DataHandler _dataHandler;
+        private readonly SortHandler _sortHandler;
+
         // XAML Bindings
         public ObservableCollection<IntegerModel> ListOfItems { get; set; }
         public ObservableCollection<NamedSort> Sorters { get; set;  }
         public NamedSort SelectedSort { get; set;  }
 
-        public SortViewModel(Plot colPlot)
+        public SortViewModel(Plot colPlot, DataHandler dataHandler, SortHandler sortHandler)
         {
             _colPlot = colPlot;
+            _dataHandler = dataHandler;
+            _sortHandler = sortHandler;
 
             /* Set axes maximums here instead of binding them because binding them in XAML
              * causes an issue where the plot auto-resizes based on the height of the currently
@@ -28,14 +33,13 @@ namespace VisualSorts.Core.ViewModels
              */
             foreach (var axes in _colPlot.Axes) axes.Maximum = NumElements;
 
-            Sorters = SortFactory.GetSorters();
+            Sorters = _sortHandler.GetSorters();
             SelectedSort = Sorters[0];
             ResetData();
         }
 
         // Command Bindings
         public ICommand Sort => new SortCommand(this);
-
         public ICommand Reset => new ResetCommand(this);
 
         // Command Functions
@@ -46,7 +50,7 @@ namespace VisualSorts.Core.ViewModels
 
         public void ResetData()
         {
-            ListOfItems = IntegerModelFactory.GetRandom(NumElements);
+            ListOfItems = _dataHandler.GetRandom(NumElements);
             _colPlot.Series[0].ItemsSource = ListOfItems;
         }
     }

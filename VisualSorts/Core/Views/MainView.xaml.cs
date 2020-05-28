@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using VisualSorts.Core.Factories;
 using VisualSorts.Core.ViewModels;
 
 namespace VisualSorts.Core.Views
@@ -6,12 +6,12 @@ namespace VisualSorts.Core.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainView
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
-            DataContext = new SortViewModel(ColPlot);
+            DataContext = new SortViewModel(ColPlot, new DataHandler(), new SortHandler());
         }
     }
 }
