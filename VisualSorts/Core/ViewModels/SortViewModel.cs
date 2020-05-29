@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using OxyPlot.Wpf;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using VisualSorts.Core.Commands;
 using VisualSorts.Core.Factories;
@@ -38,6 +39,8 @@ namespace VisualSorts.Core.ViewModels
         // Command Bindings
         public ICommand Sort => new SortCommand(this);
         public ICommand Reset => new ResetCommand(this);
+        public ICommand Randomize => new RandomizeCommand(this);
+        public ICommand Reverse => new ReverseCommand(this);
 
         // Command Functions
         public void SortData()
@@ -48,6 +51,18 @@ namespace VisualSorts.Core.ViewModels
         public void ResetData()
         {
             SetPlotData(InitialData);
+        }
+
+        public void RandomizeData()
+        {
+            var randomData = _sortableData.GetRandom();
+            SetPlotData(randomData);
+        }
+
+        public void ReverseData()
+        {
+            var reversedData = ListOfItems.Reverse();
+            SetPlotData(reversedData);
         }
 
         // Private helpers

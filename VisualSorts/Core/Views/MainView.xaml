@@ -9,6 +9,8 @@
             <ComboBox Width="200" Margin="2,2,1,2" ItemsSource="{Binding Sorters}" SelectedItem="{Binding SelectedSort}" DisplayMemberPath="Name"/>
             <Button Content="Sort" Width="100" Margin="1,2,1,2" Command="{Binding Sort}"/>
             <Button Content="Reset" Width="100" Margin="1,2,1,2" Command="{Binding Reset}"/>
+            <Button Content="Randomize" Width="100" Margin="1,2,1,2" Command="{Binding Randomize}"/>
+            <Button Content="Reverse" Width="100" Margin="1,2,1,2" Command="{Binding Reverse}"/>
         </StackPanel>
 
         <oxy:Plot Name="ColPlot" PlotAreaBorderColor="Transparent" PlotAreaBackground="Transparent" Background="Transparent" DockPanel.Dock="Top" Margin="2,2,2,2">
