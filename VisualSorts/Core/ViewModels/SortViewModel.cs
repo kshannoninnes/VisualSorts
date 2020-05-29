@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OxyPlot.Wpf;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media;
 using VisualSorts.Core.Commands;
 using VisualSorts.Core.Factories;
 using VisualSorts.Core.Models;
@@ -15,12 +17,25 @@ namespace VisualSorts.Core.ViewModels
         private readonly SortableData _sortableData;
         private readonly SortHandler _sortHandler;
 
-        private ObservableCollection<IntegerModel> InitialData; 
+        private ObservableCollection<IntegerModel> InitialData;
 
         // XAML Bindings
         public ObservableCollection<IntegerModel> ListOfItems { get; set; }
         public ObservableCollection<NamedSort> Sorters { get; set;  }
         public NamedSort SelectedSort { get; set; }
+        
+        public ObservableCollection<NamedColor> BarColors { get; set; }
+
+        private NamedColor _selectedColor;
+        public NamedColor SelectedColor
+        {
+            get => _selectedColor;
+            set
+            {
+                SwitchColor(value);
+                _selectedColor = value;
+            }
+        }
 
         public SortViewModel(Plot colPlot, SortHandler sortHandler, SortableData sortableData)
         {
@@ -34,6 +49,17 @@ namespace VisualSorts.Core.ViewModels
 
             Sorters = _sortHandler.GetSorters();
             SelectedSort = Sorters[0];
+
+            BarColors = new ObservableCollection<NamedColor>
+            {
+                new NamedColor(Colors.DarkRed, "Red"),
+                new NamedColor(Colors.SlateBlue, "Purple"),
+                new NamedColor(Colors.RoyalBlue, "Blue"),
+                new NamedColor(Colors.DarkCyan, "Cyan"),
+                new NamedColor(Colors.ForestGreen, "Green"),
+            };
+
+            SelectedColor = BarColors.First(x => x.Name.Equals("Purple"));
         }
 
         // Command Bindings
@@ -63,6 +89,12 @@ namespace VisualSorts.Core.ViewModels
         {
             var reversedData = ListOfItems.Reverse();
             SetPlotData(reversedData);
+        }
+
+        public void SwitchColor(NamedColor color)
+        {
+            var currentSeries = ((ColumnSeries) _colPlot.Series[0]);
+            currentSeries.FillColor = color.MediaColor;
         }
 
         // Private helpers

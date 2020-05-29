@@ -5,16 +5,20 @@
         Title="VisualSorts" Height="900" Width="1440" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" MinWidth="800" MinHeight="600">
 
     <DockPanel Background="#2C2F33">
-        <StackPanel Height="30" DockPanel.Dock="Top" Orientation="Horizontal" Background="Transparent">
-            <ComboBox Width="200" Margin="2,2,1,2" ItemsSource="{Binding Sorters}" SelectedItem="{Binding SelectedSort}" DisplayMemberPath="Name"/>
-            <Button Content="Sort" Width="100" Margin="1,2,1,2" Command="{Binding Sort}"/>
-            <Button Content="Reset" Width="100" Margin="1,2,1,2" Command="{Binding Reset}"/>
-            <Button Content="Randomize" Width="100" Margin="1,2,1,2" Command="{Binding Randomize}"/>
-            <Button Content="Reverse" Width="100" Margin="1,2,1,2" Command="{Binding Reverse}"/>
-        </StackPanel>
+        <DockPanel Height="30" DockPanel.Dock="Top" Background="Transparent" LastChildFill="False">
+            <ComboBox ItemsSource="{Binding Sorters}" SelectedItem="{Binding SelectedSort}" DisplayMemberPath="Name"
+                      Width="200" Margin="2,2,1,2"/>
+            <Button Content="Sort" Command="{Binding Sort}" Width="100" Margin="1,2,1,2"/>
+            <Button Content="Reset" Command="{Binding Reset}" Width="100" Margin="1,2,1,2"/>
+            <Button Content="Randomize" Command="{Binding Randomize}" Width="100" Margin="1,2,1,2"/>
+            <Button Content="Reverse" Command="{Binding Reverse}" Width="100" Margin="1,2,1,2"/>
+            
+            <ComboBox ItemsSource="{Binding BarColors}" SelectedItem="{Binding SelectedColor}" DisplayMemberPath="Name" 
+                      Width="100" Margin="1,2,2,2" DockPanel.Dock="Right"/>
+        </DockPanel>
 
         <oxy:Plot Name="ColPlot" PlotAreaBorderColor="Transparent" PlotAreaBackground="Transparent" Background="Transparent" DockPanel.Dock="Top" Margin="2,2,2,2">
-            <oxy:ColumnSeries ItemsSource="{Binding ListOfItems}" ValueField="Value" FillColor="Red"/>
+            <oxy:ColumnSeries ItemsSource="{Binding ListOfItems}" ValueField="Value"/>
             <oxy:Plot.Axes>
                 <oxy:LinearAxis Position="Left" IsZoomEnabled="False" IsAxisVisible="False" />
                 <oxy:CategoryAxis Position="Bottom" IsZoomEnabled="False" IsAxisVisible="False" GapWidth="0"/>

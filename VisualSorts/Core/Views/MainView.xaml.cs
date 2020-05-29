@@ -1,4 +1,5 @@
-﻿using VisualSorts.Core.Factories;
+﻿using System.Windows.Controls;
+using VisualSorts.Core.Factories;
 using VisualSorts.Core.ViewModels;
 
 namespace VisualSorts.Core.Views
