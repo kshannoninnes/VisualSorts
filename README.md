@@ -11,7 +11,7 @@ Visual Sorts is a windows desktop application that allows a user to see a visual
 3) Run VisualSorts.exe
 
 ### Todo
-- Add ability for user to change the pre-sorted data ordering (Ordered, Randomized, Reversed)
+- ~~Add ability for user to change the pre-sorted data ordering (Ordered, Randomized, Reversed)~~ [See v1.3](https://github.com/kshannoninnes/VisualSorts/releases/tag/1.3)
 - Add metrics to show performance of different algorithms
 
 ### License
