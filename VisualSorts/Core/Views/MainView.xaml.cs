@@ -11,7 +11,9 @@ namespace VisualSorts.Core.Views
         public MainView()
         {
             InitializeComponent();
-            DataContext = new SortViewModel(ColPlot, new DataHandler(), new SortHandler());
+            var sortHandler = new SortHandler();
+            var sortableData = new SortableData(length: 100);
+            DataContext = new SortViewModel(ColPlot, sortHandler, sortableData);
         }
     }
 }
