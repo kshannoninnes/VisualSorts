@@ -1,4 +1,5 @@
-﻿using OxyPlot.Wpf;
+﻿using System.Collections.Generic;
+using OxyPlot.Wpf;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using VisualSorts.Core.Commands;
@@ -10,32 +11,28 @@ namespace VisualSorts.Core.ViewModels
     public class SortViewModel
     {
         private readonly Plot _colPlot;
-        private const int NumElements = 200;
-
-        private readonly DataHandler _dataHandler;
+        private readonly SortableData _sortableData;
         private readonly SortHandler _sortHandler;
+
+        private ObservableCollection<IntegerModel> InitialData; 
 
         // XAML Bindings
         public ObservableCollection<IntegerModel> ListOfItems { get; set; }
         public ObservableCollection<NamedSort> Sorters { get; set;  }
-        public NamedSort SelectedSort { get; set;  }
+        public NamedSort SelectedSort { get; set; }
 
-        public SortViewModel(Plot colPlot, DataHandler dataHandler, SortHandler sortHandler)
+        public SortViewModel(Plot colPlot, SortHandler sortHandler, SortableData sortableData)
         {
             _colPlot = colPlot;
-            _dataHandler = dataHandler;
+            _sortableData = sortableData;
             _sortHandler = sortHandler;
 
-            /* Set axes maximums here instead of binding them because binding them in XAML
-             * causes an issue where the plot auto-resizes based on the height of the currently
-             * visible data (ie. a column of max height gets picked up in the algorithm temporarily
-             * and the axis height shrinks until it's re-drawn)
-             */
-            foreach (var axes in _colPlot.Axes) axes.Maximum = NumElements;
+            InitialData = _sortableData.GetRandom();
+            UpdateAxesLength(InitialData.Count);
+            SetPlotData(InitialData);
 
             Sorters = _sortHandler.GetSorters();
             SelectedSort = Sorters[0];
-            ResetData();
         }
 
         // Command Bindings
@@ -50,8 +47,24 @@ namespace VisualSorts.Core.ViewModels
 
         public void ResetData()
         {
-            ListOfItems = _dataHandler.GetRandom(NumElements);
+            SetPlotData(InitialData);
+        }
+
+        // Private helpers
+        private void SetPlotData(IEnumerable<IntegerModel> data)
+        {
+            ListOfItems = new ObservableCollection<IntegerModel>(data);
             _colPlot.Series[0].ItemsSource = ListOfItems;
+        }
+
+        private void UpdateAxesLength(int length)
+        {
+            /* Set axes maximums here instead of binding them because binding them in XAML
+             * causes an issue where the plot auto-resizes based on the height of the currently
+             * visible data (ie. a column of max height gets picked up in the algorithm temporarily
+             * and the axis height shrinks until it's re-drawn)
+             */
+            foreach (var axis in _colPlot.Axes) axis.Maximum = length;
         }
     }
 }
